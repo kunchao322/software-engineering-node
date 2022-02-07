@@ -12,35 +12,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const UserModel_1 = __importDefault(require("../mongoose/UserModel"));
+const TuitModel_1 = __importDefault(require("../mongoose/TuitModel"));
 class TuitDao {
     constructor() { }
     createTuit(tuit) {
-        return UserModel_1.default.create(tuit);
+        return TuitModel_1.default.create(tuit);
     }
     deleteTuit(tid) {
         return __awaiter(this, void 0, void 0, function* () {
-            return UserModel_1.default.deleteOne({ tid });
+            return TuitModel_1.default.deleteOne({ tid });
         });
     }
     findAllTuits() {
         return __awaiter(this, void 0, void 0, function* () {
-            return UserModel_1.default.find();
+            return TuitModel_1.default.find();
         });
     }
     findTuitById(tid) {
         return __awaiter(this, void 0, void 0, function* () {
-            return UserModel_1.default.findById(tid).exec();
+            return TuitModel_1.default.findById(tid);
         });
     }
     updateTuit(tid, tuit) {
         return __awaiter(this, void 0, void 0, function* () {
-            return UserModel_1.default.updateOne({ _id: tid }, { $set: tuit });
+            return TuitModel_1.default.updateOne({ _id: tid }, { $set: tuit });
         });
     }
     findTuitsByUser(uid) {
         return __awaiter(this, void 0, void 0, function* () {
-            return UserModel_1.default.find({ postedBy: uid });
+            return TuitModel_1.default.find({ postedBy: uid });
         });
     }
 }

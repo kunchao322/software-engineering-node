@@ -25,8 +25,5 @@ class TuitController {
         this.app.delete("/tuits/:tid", this.deleteTuit);
         this.app.put("tuits/:tid", this.updateTuit);
     }
-    createTuitByUser(req, res) {
-        throw new Error("Method not implemented.");
-    }
 }
 exports.default = TuitController;
