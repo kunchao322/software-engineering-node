@@ -11,9 +11,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
-const local = 'mongodb://127.0.0.1:27017/tuiter'
-const dbURL = local || connectionString;
-mongoose.connect(dbURL);
+// const local = 'mongodb://127.0.0.1:27017/tuiter'
+// const dbURL = local || connectionString;
+// mongoose.connect(dbURL);
+mongoose.connect(connectionString);
 
 const app = express();
 
