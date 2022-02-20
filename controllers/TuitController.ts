@@ -13,17 +13,7 @@ import Tuit from "../models/Tuit";
 export default class TuitController implements TuitControllerI {
     private static tuitDao: TuitDao;
     private static tuitController: TuitController | null = null;
-    // constructor(app: Express, tuitDao: TuitDao) {
-    //     this.app = app;
-    //     this.tuitDao = tuitDao;
-    //     this.app.get("/tuits", this.findAllTuits);
-    //     this.app.get("/tuits/tid", this.findTuitById);
-    //     this.app.get("/users/:uid/tuits", this.findTuitsByUser);
-    //     this.app.post("/tuits", this.createTuit);
-    //     this.app.delete("/tuits/:tid", this.deleteTuit);
-    //     this.app.put("tuits/:tid", this.updateTuit);
-    //
-    // }
+
     /**
      * Creates singleton controller instance
      * @param {Express} app Express instance to declare the RESTful Web service

@@ -11,13 +11,13 @@ class UserController {
     constructor() {
         this.findAllUsers = (req, res) => UserController.userDao.findAllUsers()
             .then(users => res.json(users));
-        this.findUserById = (req, res) => UserController.userDao.findUserById(req.params.userid)
-            .then(user => res.json(user));
+        this.findUserById = (req, res) => UserController.userDao.findUserById(req.params.uid)
+            .then((user) => res.json(user));
         this.createUser = (req, res) => UserController.userDao.createUser(req.body)
             .then(user => res.json(user));
-        this.deleteUser = (req, res) => UserController.userDao.deleteUser(req.params.userid)
+        this.deleteUser = (req, res) => UserController.userDao.deleteUser(req.params.uid)
             .then(status => res.json(status));
-        this.updateUser = (req, res) => UserController.userDao.updateUser(req.params.userid, req.body)
+        this.updateUser = (req, res) => UserController.userDao.updateUser(req.params.uid, req.body)
             .then(status => res.json(status));
     }
 }
