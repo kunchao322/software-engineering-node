@@ -1,6 +1,7 @@
 import {Request, Response, Express} from "express";
 import UserDao from "../daos/UserDao";
 import UserControllerI from "../interfaces/UserControllerI";
+import User from "../models/User";
 
 /**
  *     The controller will respond to HTTP methods GET, POST, PUT, and DELETE
@@ -33,8 +34,8 @@ export default class UserController implements UserControllerI {
             .then(users => res.json(users));
 
     findUserById = (req: Request, res: Response) =>
-        UserController.userDao.findUserById(req.params.userid)
-            .then(user => res.json(user));
+        UserController.userDao.findUserById(req.params.uid)
+            .then((user: User) => res.json(user));
 
     createUser = (req: Request, res: Response) =>
         UserController.userDao.createUser(req.body)
