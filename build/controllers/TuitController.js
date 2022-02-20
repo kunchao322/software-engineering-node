@@ -4,26 +4,55 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *     The controller will respond to HTTP methods GET, POST, PUT, and DELETE
  */
 class TuitController {
-    constructor(app, tuitDao) {
-        this.createTuit = (req, res) => this.tuitDao.createTuit(req.body).then((tuit) => res.json(tuit));
-        this.findAllTuits = (req, res) => this.tuitDao.findAllTuits()
+    constructor() {
+        this.createTuit = (req, res) => TuitController.tuitDao.createTuit(req.body).then((tuit) => res.json(tuit));
+        this.findAllTuits = (req, res) => TuitController.tuitDao.findAllTuits()
             .then((tuits) => res.json(tuits));
-        this.findTuitsByUser = (req, res) => this.tuitDao.findTuitsByUser(req.params.uid)
+        this.findTuitsByUser = (req, res) => TuitController.tuitDao.findTuitsByUser(req.params.uid)
             .then((tuits) => res.json(tuits));
-        this.findTuitById = (req, res) => this.tuitDao.findTuitById(req.params.uid)
+        this.findTuitById = (req, res) => TuitController.tuitDao.findTuitById(req.params.uid)
             .then((tuit) => res.json(tuit));
-        this.updateTuit = (req, res) => this.tuitDao.updateTuit(req.params.uid, req.body)
+        this.updateTuit = (req, res) => TuitController.tuitDao.updateTuit(req.params.uid, req.body)
             .then((status) => res.send(status));
-        this.deleteTuit = (req, res) => this.tuitDao.deleteTuit(req.params.uid)
+        this.deleteTuit = (req, res) => TuitController.tuitDao.deleteTuit(req.params.uid)
             .then((status) => res.send(status));
-        this.app = app;
-        this.tuitDao = tuitDao;
-        this.app.get("/tuits", this.findAllTuits);
-        this.app.get("/tuits/tid", this.findTuitById);
-        this.app.get("/users/:uid/tuits", this.findTuitsByUser);
-        this.app.post("/tuits", this.createTuit);
-        this.app.delete("/tuits/:tid", this.deleteTuit);
-        this.app.put("tuits/:tid", this.updateTuit);
+        this.findAllTuitsByUser = (req, res) => {
+            TuitController.tuitDao.findAllTuitsByUser(req.params.uid).then((tuits) => res.json(tuits));
+        };
+        this.createTuitByUser = (req, res) => {
+            TuitController.tuitDao.createTuitByUser(req.params.uid, req.body).then((tuit) => res.json(tuit));
+        };
     }
 }
 exports.default = TuitController;
+TuitController.tuitController = null;
+// constructor(app: Express, tuitDao: TuitDao) {
+//     this.app = app;
+//     this.tuitDao = tuitDao;
+//     this.app.get("/tuits", this.findAllTuits);
+//     this.app.get("/tuits/tid", this.findTuitById);
+//     this.app.get("/users/:uid/tuits", this.findTuitsByUser);
+//     this.app.post("/tuits", this.createTuit);
+//     this.app.delete("/tuits/:tid", this.deleteTuit);
+//     this.app.put("tuits/:tid", this.updateTuit);
+//
+// }
+/**
+ * Creates singleton controller instance
+ * @param {Express} app Express instance to declare the RESTful Web service
+ * API
+ * @return TuitController
+ */
+TuitController.getInstance = (app) => {
+    if (TuitController.tuitController === null) {
+        TuitController.tuitController = new TuitController();
+        app.post("/users/:uid/tuits", TuitController.tuitController.createTuitByUser);
+        app.get("/users/:tid/tuits", TuitController.tuitController.findAllTuitsByUser);
+        app.get("/tuits/:tid", TuitController.tuitController.findTuitById);
+        app.delete("/tuits/:tid", TuitController.tuitController.deleteTuit);
+        app.put("/tuits/:tid", TuitController.tuitController.updateTuit);
+        app.get("/tuits", TuitController.tuitController.findAllTuits);
+        app.post("/tuits", TuitController.tuitController.findTuitById);
+    }
+    return TuitController.tuitController;
+};

@@ -1,6 +1,7 @@
 import Tuit from "../models/Tuit";
 import TuitModel from "../mongoose/TuitModel";
 import TuitDaoI from "../interfaces/TuitDaoI";
+import TuitController from "../controllers/TuitController";
 
 export default class TuitDao implements TuitDaoI {
     private static tuitDao: TuitDao | null = null;
@@ -36,4 +37,11 @@ export default class TuitDao implements TuitDaoI {
         return TuitModel.find({postedBy: uid});
     }
 
+    async findAllTuitsByUser(uid: string): Promise<Tuit[]> {
+        return TuitModel.find({postedBy: uid});
+    }
+
+    async createTuitByUser(uid: string, tuit: Tuit): Promise<Tuit> {
+        return TuitModel.create({...tuit, postedBy: uid});
+    }
 }

@@ -43,6 +43,16 @@ class TuitDao {
             return TuitModel_1.default.find({ postedBy: uid });
         });
     }
+    findAllTuitsByUser(uid) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return TuitModel_1.default.find({ postedBy: uid });
+        });
+    }
+    createTuitByUser(uid, tuit) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return TuitModel_1.default.create(Object.assign(Object.assign({}, tuit), { postedBy: uid }));
+        });
+    }
 }
 exports.default = TuitDao;
 TuitDao.tuitDao = null;

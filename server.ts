@@ -10,11 +10,11 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
-const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
-// const local = 'mongodb://127.0.0.1:27017/tuiter'
+// const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
+const local = 'mongodb://127.0.0.1:27017/tuiter'
 // const dbURL = local || connectionString;
-// mongoose.connect(dbURL);
-mongoose.connect(connectionString);
+mongoose.connect(local);
+// mongoose.connect(connectionString);
 
 const app = express();
 
@@ -26,8 +26,8 @@ app.get('/hello', (req: Request, res: Response) =>
 app.get('/add/:a/:b', (req: Request, res: Response) =>
     res.send(req.params.a + req.params.b));
 
-const  userController = new UserController(app, UserDao.getInstance());
-const  tuitController = new TuitController(app, TuitDao.getInstance());
+const  userController = UserController.getInstance(app);
+const  tuitController = TuitController.getInstance(app);
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
