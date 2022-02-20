@@ -10,11 +10,11 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
-// const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
-const local = 'mongodb://127.0.0.1:27017/tuiter'
-// const dbURL = local || connectionString;
-mongoose.connect(local);
-// mongoose.connect(connectionString);
+const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
+mongoose.connect(connectionString);
+//
+// const local = 'mongodb://127.0.0.1:27017/tuiter'
+// mongoose.connect(local);
 
 const app = express();
 
