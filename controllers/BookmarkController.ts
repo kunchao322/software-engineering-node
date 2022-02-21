@@ -4,7 +4,7 @@
 import {Express, Request, Response} from "express";
 import bookmarkDao from "../daos/BookmarkDao";
 import BookmarkControllerI from "../interfaces/BookmarkControllerI";
-import Bookmark from "../models/Bookmarks/Bookmark";
+import Bookmark from "../models/bookmarks/Bookmark";
 import BookmarkDao from "../daos/BookmarkDao";
 
 /**
@@ -48,9 +48,10 @@ export default class BookmarkController implements BookmarkControllerI {
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON arrays containing the user objects
      */
+        //TODO: this is returing null
     findAllUsersThatBookmarkedTuit = (req: Request, res: Response) =>
         BookmarkController.bookmarkDao.findAllUsersThatBookmarkedTuit(req.params.tid)
-            .then(bookmarks => res.json(bookmarks));
+            .then(users => res.json(users));
     /**
      * Retrieves all tuits liked by a user from the database
      * @param {Request} req Represents request from client, including the path
@@ -70,9 +71,12 @@ export default class BookmarkController implements BookmarkControllerI {
      * body formatted as JSON containing the new likes that was inserted in the
      * database
      */
-    userBookmarksTuit = (req: Request, res: Response) =>
+    userBookmarksTuit = (req: Request, res: Response) => {
+        console.log('Bookmark');
+        console.log(req.params.uid);
         BookmarkController.bookmarkDao.userBookmarksTuit(req.params.uid, req.params.tid)
             .then(bookmarks => res.json(bookmarks));
+    }
 
     /**
      * @param {Request} req Represents request from client, including the

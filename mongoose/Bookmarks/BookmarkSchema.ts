@@ -1,6 +1,6 @@
 
 import mongoose, {Schema} from "mongoose";
-import Bookmark from "../../models/Bookmarks/Bookmark";
+import Bookmark from "../../models/bookmarks/Bookmark";
 
 const BookmarkSchema = new mongoose.Schema<Bookmark>({
     tuit: {type: Schema.Types.ObjectId, ref: "TuitModel"},

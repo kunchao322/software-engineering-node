@@ -10,6 +10,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const TuitController_1 = __importDefault(require("./controllers/TuitController"));
 const LikeController_1 = __importDefault(require("./controllers/LikeController"));
 const BookmarkController_1 = __importDefault(require("./controllers/BookmarkController"));
+const FollowController_1 = __importDefault(require("./controllers/FollowController"));
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
@@ -25,5 +26,6 @@ const userController = UserController_1.default.getInstance(app);
 const tuitController = TuitController_1.default.getInstance(app);
 const likeController = LikeController_1.default.getInstance(app);
 const bookmarkController = BookmarkController_1.default.getInstance(app);
+const followController = FollowController_1.default.getInstance(app);
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);

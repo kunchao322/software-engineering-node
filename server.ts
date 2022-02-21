@@ -8,6 +8,7 @@ import TuitDao from "./daos/TuitDao";
 import LikeController from "./controllers/LikeController";
 import BookmarkDao from "./daos/BookmarkDao";
 import BookmarkController from "./controllers/BookmarkController";
+import FollowController from "./controllers/FollowController";
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -33,6 +34,7 @@ const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
 const likeController = LikeController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
+const followController = FollowController.getInstance(app);
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
