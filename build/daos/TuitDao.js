@@ -16,7 +16,9 @@ const TuitModel_1 = __importDefault(require("../mongoose/TuitModel"));
 class TuitDao {
     constructor() { }
     createTuit(tuit) {
-        return TuitModel_1.default.create(tuit);
+        return __awaiter(this, void 0, void 0, function* () {
+            return TuitModel_1.default.create(tuit);
+        });
     }
     deleteTuit(tid) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -30,7 +32,7 @@ class TuitDao {
     }
     findTuitById(tid) {
         return __awaiter(this, void 0, void 0, function* () {
-            return TuitModel_1.default.findById(tid);
+            return TuitModel_1.default.findById(tid).populate("postedBy").exec();
         });
     }
     updateTuit(tid, tuit) {
