@@ -9,16 +9,17 @@ import LikeController from "./controllers/LikeController";
 import BookmarkDao from "./daos/BookmarkDao";
 import BookmarkController from "./controllers/BookmarkController";
 import FollowController from "./controllers/FollowController";
+import MessageController from "./controllers/MessageController";
 
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-// const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
-// mongoose.connect(connectionString);
 
+const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l3k3n.mongodb.net/TUITER?retryWrites=true&w=majority`;
+mongoose.connect(connectionString);
 
-const local = 'mongodb://127.0.0.1:27017/tuiter'
-mongoose.connect(local);
+// const local = 'mongodb://127.0.0.1:27017/tuiter'
+// mongoose.connect(local);
 
 const app = express();
 
@@ -35,6 +36,7 @@ const tuitController = TuitController.getInstance(app);
 const likeController = LikeController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const followController = FollowController.getInstance(app);
+const messageController = MessageController.getInstance(app);
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
