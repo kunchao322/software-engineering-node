@@ -1,3 +1,6 @@
+/**
+ * @file DataSchema to define User attributes
+ */
 import mongoose, {Schema} from "mongoose";
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true},

@@ -1,4 +1,6 @@
-
+/**
+ * @file DataSchema to define Follow attributes
+ */
 import mongoose, {Schema} from "mongoose";
 import Follow from "../../models/follows/Follow";
 

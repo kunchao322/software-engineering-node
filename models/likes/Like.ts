@@ -13,6 +13,6 @@ import User from "../User";
  * @property {User} likedBy User liking the tuit
  */
 export default interface Like{
-    tuit: Tuit; //TODO why using object
+    tuit: Tuit;
     likedBy: User;
 }

@@ -4,11 +4,6 @@
 import {Express, Request, Response} from "express";
 import MessageControllerI from "../interfaces/MessageControllerI";
 import MessageDao from "../daos/MessageDao";
-import Message from "../models/messages/Message";
-import MessageModel from "../mongoose/Message/MessageModel";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
-
 
 /**
  * @class TuitController Implements RESTful Web service API for likes resource.

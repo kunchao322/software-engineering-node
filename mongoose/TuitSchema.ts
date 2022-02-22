@@ -1,3 +1,6 @@
+/**
+ * @file Define TuitSchema with mongoose
+ */
 import mongoose, {Schema} from "mongoose";
 import Tuit from "../models/Tuit";
 const TuitSchema = new mongoose.Schema<Tuit>({

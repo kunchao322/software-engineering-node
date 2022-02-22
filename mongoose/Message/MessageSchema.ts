@@ -1,3 +1,6 @@
+/**
+ * @file DataSchema to define Message attributes
+ */
 import mongoose, {Schema} from "mongoose";
 import Message from "../../models/messages/Message";
 

@@ -63,7 +63,7 @@ export default class TuitController implements TuitControllerI {
     /**
      * Retrieves all tuits from the database for a particular user and returns
      * an array of tuits.
-     * @param {Request} req Represents request from client
+     * @param {Request} req Represents request from client, including user's primary key uid as path parameter
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON arrays containing the tuit objects
      */
@@ -72,6 +72,8 @@ export default class TuitController implements TuitControllerI {
             .then((tuits: Tuit[]) => res.json(tuits));
 
     /**
+     * Retrieves a tuit from the database for a particular tid and returns
+     * a tuit.
      * @param {Request} req Represents request from client, including path
      * parameter tid identifying the primary key of the tuit to be retrieved
      * @param {Response} res Represents response to client, including the
@@ -81,7 +83,7 @@ export default class TuitController implements TuitControllerI {
         TuitController.tuitDao.findTuitById(req.params.uid)
             .then((tuit: Tuit) => res.json(tuit));
 
-    /**
+    /**Update a particular tuit base on the given  tuit body info and the tid selected
      * @param {Request} req Represents request from client, including path
      * parameter tid identifying the primary key of the tuit to be modified
      * @param {Response} res Represents response to client, including status
@@ -92,6 +94,7 @@ export default class TuitController implements TuitControllerI {
             .then((status) => res.send(status));
 
     /**
+     * Delete a specific tuit
      * @param {Request} req Represents request from client, including path
      * parameter tid identifying the primary key of the tuit to be removed
      * @param {Response} res Represents response to client, including status
@@ -102,6 +105,8 @@ export default class TuitController implements TuitControllerI {
             .then((status) => res.send(status));
 
     /**
+     * Insert a tuit created by a particular user
+     *
      * @param {Request} req Represents request from client, including body
      * containing the JSON object for the new tuit to be inserted in the
      * database
@@ -113,12 +118,28 @@ export default class TuitController implements TuitControllerI {
         TuitController.tuitDao.createTuitByUser(req.params.uid, req.body).then((tuit: Tuit) => res.json(tuit));
     }
 
+    /**
+     * Find all tuits created by a specific user
+     * @param {Request} req Represents request from client, including path
+     * parameter uid identifying the primary key of the user created tuits
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON containing the new tuit that was inserted in the
+     * database
+     */
     findAllTuitsByUser = (req: Request, res: Response) =>{
         TuitController.tuitDao.findAllTuitsByUser(req.params.uid).then((tuits: Tuit[]) => res.json(tuits));
     };
 
+    /**
+     * Insert a tuit
+     *
+     * @param {Request} req Represents request from client, including body
+     * containing the JSON object for the new tuit to be inserted in the
+     * database
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON containing the new tuit that was inserted in the
+     * database
+     */
     createTuit = (req: Request, res: Response) =>
         TuitController.tuitDao.createTuit(req.body).then((tuit: Tuit) => res.json(tuit));
-
-
 }

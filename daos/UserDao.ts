@@ -1,3 +1,8 @@
+/**
+ * @file Implements DAO managing data storage of users. Uses mongoose UserModel
+ * to integrate with MongoDB
+ */
+
 import User from "../models/User";
 import UserModel from "../mongoose/UserModel";
 import UserDaoI from "../interfaces/UserDaoI";
@@ -8,6 +13,11 @@ import UserDaoI from "../interfaces/UserDaoI";
  */
 export default class UserDao implements UserDaoI {
     private static userDao: UserDaoI | null = null;
+
+    /**
+     * Creates singleton DAO instance
+     * @returns userDao
+     */
     public static getInstance = (): UserDao =>{
         if(UserDao.userDao === null) {
             UserDao.userDao = new UserDao();
@@ -16,20 +26,50 @@ export default class UserDao implements UserDaoI {
     }
     private constructor(){}
 
+    /**
+     * Uses UserModel to retrieve all user documents from users collection
+     * @returns Promise To be notified when the users are retrieved from
+     * database
+     */
     async findAllUsers(): Promise<User[]> {
         return UserModel.find();
     }
 
+    /**
+     * Uses UserModel to retrieve single user document from users collection
+     * @param {string} uid Tuit's primary key
+     * @returns Promise To be notified when user is retrieved from the database
+     */
     async findUserById(uid: string): Promise<any> {
         return UserModel.findById(uid);
     }
 
+    /**
+     * Inserts user instance into the database
+     * @param {User} user Instance to be inserted into the database
+     * @returns Promise To be notified when user is inserted into the database
+     */
     async createUser(user: User): Promise<User> {
         return await UserModel.create(user);
     }
+
+    /**
+     * Delete a selected user from database
+     *
+     * @param {string} uid User's primary key
+     * @returns Promise To be notified when the record is deleted
+     */
     async deleteUser(uid: string):  Promise<any> {
         return  UserModel.deleteOne({_id: uid});
     }
+
+    /**
+     * Updates user with new values in database
+     *
+     * @param {string} uid Primary key of tuit to be modified
+     * @param {User} user User object containing properties and their new values
+     * @returns Promise To be notified when user is updated in the database
+     */
     async updateUser(uid: string, user: User): Promise<any> {
         return  UserModel.updateOne({_id: uid}, {$set: user});
     }

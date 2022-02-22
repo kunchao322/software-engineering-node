@@ -1,4 +1,6 @@
-
+/**
+ * @file DataSchema to define Like attributes
+ */
 import mongoose, {Schema} from "mongoose";
 import Like from "../../models/likes/Like";
 

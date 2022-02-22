@@ -6,10 +6,10 @@
 import User from "../User";
 
 /**
- * @typedef Follow Represents likes relationship between a user and a tuit,
+ * @typedef Follow Represents follows relationship between a user and a tuit,
  * as in a user likes a tuit
- * @property {User} following users the a
- * @property {User} followedBy User followed by the other user
+ * @property {User} blogger as the user who post the tuit
+ * @property {User} followedBy as the follower who start the following action
  */
 export default interface Follow{
     blogger: User;

@@ -1,4 +1,6 @@
-
+/**
+ * @file DataSchema to define Bookmark attributes
+ */
 import mongoose, {Schema} from "mongoose";
 import Bookmark from "../../models/bookmarks/Bookmark";
 
